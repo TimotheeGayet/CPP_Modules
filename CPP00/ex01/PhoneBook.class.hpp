@@ -1,38 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*   PhoneBook.class.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgayet <tgayet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/11 19:07:17 by tgayet            #+#    #+#             */
-/*   Updated: 2024/01/08 13:21:10 by tgayet           ###   ########lyon.fr   */
+/*   Created: 2024/01/08 15:35:25 by tgayet            #+#    #+#             */
+/*   Updated: 2024/01/08 16:51:14 by tgayet           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#ifndef PHONEBOOK_CLASS_HPP
+# define PHONEBOOK_CLASS_HPP
 
-int	main(int argc, char **argv) {
-	
-	int	i = 0;
-	int	j = -1;
+# include <string>
+# include "./Contact.class.hpp"
 
-	if (argc < 2) {
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *\n";
-		return 0;
-	}
+class PhoneBook {
+	public:
+		void	init_contact();
+		void	search();
+		void	exit();
 
-	while (argv[++i]) {
-		j = -1;
+	private:
+		Contact	contact_list[8];
+};
 
-		while (argv[i][++j]){
-			if (argv[i][j] > 96 && argv[i][j] < 123)
-				std::cout << (char)(argv[i][j] - 32);
-			else
-				std::cout << argv[i][j];
-		}
-	}
-	std::cout << '\n';
-
-	return 0;
-}
+#endif
