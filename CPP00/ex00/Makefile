@@ -9,7 +9,7 @@ OBJS = megaphone.o
 $(TARGET) : $(OBJS)
 	$(CXX) $< -o $@
 
-%.o : %.cpp
+%.o : %.cpp Makefile
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 $(BUILD_DIR) :

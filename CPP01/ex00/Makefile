@@ -1,15 +1,15 @@
 CXX = c++
 CXXFLAGS = -std=c++98 -Wall -Wextra -Werror
 
-TARGET = phonebook
+TARGET = zombie
 
-SRCS = ex01.cpp Contact.class.cpp PhoneBook.class.cpp
+SRCS = main.cpp Zombie.cpp newZombie.cpp randomChump.cpp
 OBJS = $(SRCS:%.cpp=.obj/%.o)
 
-$(TARGET) : $(OBJS) 
+$(TARGET) : $(OBJS)
 	$(CXX) $(OBJS) -o $@
 
-.obj/%.o : %.cpp PhoneBook.class.hpp Contact.class.hpp Makefile
+.obj/%.o : %.cpp Zombie.hpp Makefile
 	@if [ ! -d .obj ]; then 	mkdir -p $(@D); fi
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 

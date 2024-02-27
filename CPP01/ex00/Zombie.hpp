@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PhoneBook.class.hpp                                :+:      :+:    :+:   */
+/*   Zombie.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgayet <tgayet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/08 15:35:25 by tgayet            #+#    #+#             */
-/*   Updated: 2024/02/27 14:48:21 by tgayet           ###   ########lyon.fr   */
+/*   Created: 2024/02/27 10:47:26 by tgayet            #+#    #+#             */
+/*   Updated: 2024/02/27 11:24:50 by tgayet           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK_CLASS_HPP
-# define PHONEBOOK_CLASS_HPP
+#ifndef ZOMBIE_HPP
+# define ZOMBIE_HPP
 
 # include <string>
-# include "./Contact.class.hpp"
 
-class PhoneBook {
-public:
-	PhoneBook();								// Constructeur par défaut
-	PhoneBook(const PhoneBook& other);				// Constructeur de copie
-	PhoneBook& operator=(const PhoneBook& other);		// Opérateur d'assignation
-	~PhoneBook();											// Destructeur
+Zombie* newZombie( std::string name );
+void	randomChump( std::string name );
 
-	int		init_contact();
-	int		search();
-	void	exit();
-
+class Zombie
+{
 private:
-	Contact contact_list[8];
-	bool boolean_list[8];
+    std::string name;
+
+public:
+    Zombie( std::string str);
+    ~Zombie() {};
+
+    void    Zombie::announce( void );
 };
 
 #endif
