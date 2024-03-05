@@ -3,13 +3,13 @@ CXXFLAGS = -std=c++98 -Wall -Wextra -Werror
 
 TARGET = phonebook
 
-SRCS = ex01.cpp Contact.class.cpp PhoneBook.class.cpp
+SRCS = ex01.cpp Contact.cpp PhoneBook.cpp
 OBJS = $(SRCS:%.cpp=.obj/%.o)
 
 $(TARGET) : $(OBJS) 
 	$(CXX) $(OBJS) -o $@
 
-.obj/%.o : %.cpp PhoneBook.class.hpp Contact.class.hpp Makefile
+.obj/%.o : %.cpp PhoneBook.hpp Contact.hpp Makefile
 	@if [ ! -d .obj ]; then 	mkdir -p $(@D); fi
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 

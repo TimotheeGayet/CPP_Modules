@@ -10,17 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONTACT_CLASS_HPP
-# define CONTACT_CLASS_HPP
+#ifndef CONTACT_HPP
+# define CONTACT_HPP
 
 # include <string>
 
 class Contact {	
 	public:
-	    Contact();  							// Constructeur par défaut
-		Contact(const Contact& other);  			// Constructeur de copie
-		Contact& operator=(const Contact& other);		// Opérateur d'assignation
-		~Contact();  										// Destructeur
+	    Contact();  							
+		Contact(const Contact& other);  			
+		Contact& operator=(const Contact& other);		
+		~Contact();  										
 	
 		int		initContact( void );
 		void		emptyContact( void );

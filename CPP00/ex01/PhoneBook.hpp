@@ -10,18 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK_CLASS_HPP
-# define PHONEBOOK_CLASS_HPP
+#ifndef PHONEBOOK_HPP
+# define PHONEBOOK_HPP
 
 # include <string>
-# include "./Contact.class.hpp"
+# include "./Contact.hpp"
 
 class PhoneBook {
 public:
-	PhoneBook();								// Constructeur par défaut
-	PhoneBook(const PhoneBook& other);				// Constructeur de copie
-	PhoneBook& operator=(const PhoneBook& other);		// Opérateur d'assignation
-	~PhoneBook();											// Destructeur
+	PhoneBook();								
+	PhoneBook(const PhoneBook& other);				
+	PhoneBook& operator=(const PhoneBook& other);		
+	~PhoneBook();											
 
 	int		init_contact();
 	int		search();

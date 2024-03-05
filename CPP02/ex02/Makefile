@@ -1,15 +1,15 @@
 CXX = c++
 CXXFLAGS = -std=c++98 -Wall -Wextra -Werror
 
-TARGET = violence
+TARGET = fixed
 
-SRCS = megaphone.cpp
+SRCS = main.cpp Fixed.cpp
 OBJS = $(SRCS:%.cpp=.obj/%.o)
 
 $(TARGET) : $(OBJS)
 	$(CXX) $(OBJS) -o $@
 
-.obj/%.o : %.cpp Makefile
+.obj/%.o : %.cpp Fixed.hpp Makefile
 	@if [ ! -d .obj ]; then 	mkdir -p $(@D); fi
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 

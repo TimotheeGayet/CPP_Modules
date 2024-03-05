@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Contact.class.cpp                                  :+:      :+:    :+:   */
+/*   Contact.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgayet <tgayet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <iostream>
-#include "Contact.class.hpp"
+#include "Contact.hpp"
 
 Contact::Contact() {
 	firstname = "";
@@ -42,8 +42,28 @@ Contact& Contact::operator=(const Contact& other) {
 
 Contact::~Contact() {}
 
+int checkAlpha(std::string str) {
+	for (size_t i = 0; i < str.length(); i++) {
+		if (!isalpha(str[i])) {
+			std::cout << "Error\n Entry must be alphabetical characters only" << std::endl;
+			return 1;
+		}
+	}
+	return 0;
+}
+
+int checkNumber(std::string str) {
+	for (size_t i = 0; i < str.length(); i++) {
+		if (!isdigit(str[i])) {
+			std::cout << "Error\n Entry must be a number" << std::endl;
+			return 1;
+		}
+	}
+	return 0;
+}
+
 int Contact::initContact( void ) {
-	while (firstname.empty()) {
+	while (firstname.empty() || checkAlpha(firstname)) {
 		std::cout << "First name : ";
 		std::getline(std::cin, firstname);
 		if (std::cin.eof()) {
@@ -54,7 +74,7 @@ int Contact::initContact( void ) {
 		if (firstname.empty())
 			std::cout << "Error\n Entry must not be NULL" << std::endl;
 	}
-	while (lastname.empty()) {
+	while (lastname.empty() || checkAlpha(lastname)) {
 		std::cout << "Last name : ";
 		std::getline(std::cin, lastname);
 		if (std::cin.eof()) {
@@ -65,7 +85,7 @@ int Contact::initContact( void ) {
 		if (lastname.empty())
 			std::cout << "Error\n Entry must not be NULL" << std::endl;
 	}
-	while (nickname.empty()) {
+	while (nickname.empty() || checkAlpha(nickname)) {
 		std::cout << "Nickname : ";
 		std::getline(std::cin, nickname);
 		if (std::cin.eof()) {
@@ -76,7 +96,7 @@ int Contact::initContact( void ) {
 		if (nickname.empty())
 			std::cout << "Error\n Entry must not be NULL" << std::endl;
 	}
-	while (phone_number.empty()) {
+	while (phone_number.empty() || checkNumber(phone_number)) {
 		std::cout << "Phone number : ";
 		std::getline(std::cin, phone_number);
 		if (std::cin.eof()) {
@@ -87,7 +107,7 @@ int Contact::initContact( void ) {
 		if (phone_number.empty())
 			std::cout << "Error\n Entry must not be NULL" << std::endl;
 	}
-	while (darkest_secrets.empty()) {
+	while (darkest_secrets.empty() || checkAlpha(darkest_secrets)) {
 		std::cout << "Darkest secret : ";
 		std::getline(std::cin, darkest_secrets);
 		if (std::cin.eof()) {

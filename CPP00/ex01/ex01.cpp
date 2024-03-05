@@ -11,18 +11,18 @@
 /* ************************************************************************** */
 
 #include <iostream>
-#include "./Contact.class.hpp"
-#include "./PhoneBook.class.hpp"
+#include "./Contact.hpp"
+#include "./PhoneBook.hpp"
 
 int main() {
-	std::string input = "";
+	std::string input;
 	PhoneBook phonebook;
 
-	std::cout << "Bienvenue,\n";
+	std::cout << "Welcome,\n";
 	while (true) {
-		std::cout << "Veuillez executer une des commandes suivantes :\n- ADD\n- SEARCH\n- EXIT\n\nInput: ";
+		std::cout << "Please enter one of the following options :\n- ADD\n- SEARCH\n- EXIT\n\nInput: ";
 		std::getline(std::cin, input);
-		std::cout << "\n";
+		std::cout << std::endl;
 		if (std::cin.eof()) {
 			std::cout << "\nError: EOF encountered." << std::endl;
 			break;
@@ -38,7 +38,7 @@ int main() {
 		else if (input == "SEARCH") {
 			if (phonebook.search() == 1) {}
 		}
-		std::cout << "\n";
+		std::cout << std::endl;
 	}
 
 	return 0;

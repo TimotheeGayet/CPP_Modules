@@ -12,7 +12,7 @@
 
 #include <iostream>
 #include <cctype>
-#include "PhoneBook.class.hpp"
+#include "PhoneBook.hpp"
 
 PhoneBook::PhoneBook() {
 	boolean_list[0] = false;
@@ -38,7 +38,6 @@ PhoneBook& PhoneBook::operator=(const PhoneBook& other) {
 PhoneBook::~PhoneBook() {}
 
 int	PhoneBook::init_contact() {
-	Contact contact;
 	int	i = 0;
 
 	while (i < 8 && boolean_list[i])
