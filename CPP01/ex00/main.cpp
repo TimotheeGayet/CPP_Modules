@@ -10,9 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./Zombie.hpp"
+#include "Zombie.hpp"
 
-void    main() {
-    Zombie* zombie = newZombie( "Alfred" );
-    
+int    main() {
+    Zombie* z = newZombie( "zombie" );
+    Zombie z2( "zombie2" );
+
+    z->announce();
+    z2.announce();  
+
+    randomChump( "chump" );
+
+    delete z;
+
+    return 0;
 }

@@ -19,6 +19,10 @@ Zombie::Zombie( std::string str ) {
 		name = str;
 }
 
+Zombie::~Zombie( void ) {
+	std::cout << name << " is dead" << std::endl;
+}
+
 void    Zombie::announce( void ) {
-	std::cout << name << ": BraiiiiiiinnnzzzZ...";
+	std::cout << name << ": BraiiiiiiinnnzzzZ..." << std::endl;
 }

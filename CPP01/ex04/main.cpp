@@ -7,6 +7,10 @@ int main(int argc, char **argv) {
         std::cout << "Invalid number of arguments" << std::endl;
         return 1;
     }
+    if (argv[2][0] == '\0' || argv[3][0] == '\0') {
+        std::cout << "Invalid string" << std::endl;
+        return 1;
+    }
     std::string infile = argv[1];
     std::string s1 = argv[2];
     std::string s2 = argv[3];
@@ -14,7 +18,7 @@ int main(int argc, char **argv) {
 
     std::ifstream ifs (infile.c_str(), std::ifstream::in);
     if (!ifs.is_open()) {
-        std::cout << "File " << infile << " does not exist" << std::endl;
+        std::cout << "Could not open File " << infile << std::endl;
         return 1;
     }
 
@@ -27,7 +31,7 @@ int main(int argc, char **argv) {
 
     File file(ofs, ifs, s1);
 
-    file.updateFile( s1, s2 );
+    file.replaceInFile( s1, s2 );
 
     ifs.close();
     ofs.close();

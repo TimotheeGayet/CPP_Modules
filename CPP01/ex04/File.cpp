@@ -9,7 +9,7 @@ File::~File( void ) {
     return ;
 }
 
-void File::updateFile( std::string old_str, std::string new_str ) {
+void File::replaceInFile( std::string old_str, std::string new_str ) {
     std::string line;
     while (std::getline(infile, line)) {
         size_t pos = line.find(old_str);

@@ -14,20 +14,17 @@
 #include <iostream>
 
 int    main() {
-    int nbr = 0;
-    std::string name;
 
-    std::cout << "How many zombies do you want to create ? ";
-    std::cin >> nbr;
-    std::cout << "What's their name ? ";
-    std::cin >> name;
+    int N = 20;
 
-    Zombie* horde = zombieHorde( nbr, name );
+    Zombie* horde = zombieHorde(N, "zombie");
+    if (!horde)
+        return 1;
 
-    for (int i = 0; i < nbr; i++) {
+    for (int i = 0; i < N; i++)
         horde[i].announce();
-    }
 
     delete[] horde;
+
     return 0;
 }

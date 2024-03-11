@@ -19,5 +19,10 @@ int main() {
         club.setType("some other type of club");
         jim.attack();
     }
+    {
+        Weapon club = Weapon("");
+        HumanA bob("Bob", club);
+        bob.attack();
+    }
     return 0;
 }

@@ -9,7 +9,7 @@ class File {
         File( std::ofstream& outfile, std::ifstream& infile, std::string content );
         ~File();
         
-        void updateFile( std::string old_str, std::string new_str );
+        void replaceInFile( std::string old_str, std::string new_str );
 
     private:
         std::ofstream& outfile;
