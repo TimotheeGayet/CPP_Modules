@@ -29,4 +29,8 @@ int main( void ) {
 	std::cout << "a--: " << a-- << std::endl;
 	std::cout << "a: " << a << std::endl;
 	
+	std::cout << "max(a, b): " << Fixed::max(a, b) << std::endl;
+	std::cout << "min(a, b): " << Fixed::min(a, b) << std::endl;
+
+	return 0;
 }

@@ -2,12 +2,15 @@
 #include <iostream>
 
 int main( void ) {
-    ClapTrap jean("jean", 100, 100, 10);
-    ClapTrap bob("bob", 100, 100, 10);
+    ClapTrap jean("jean");
+    ClapTrap bob("bob");
 
     jean.attack("bob");
+    bob.takeDamage(5);
     bob.beRepaired(5);
-    jean.takeDamage(10);
+    jean.attack("bob");
+    bob.takeDamage(10);
+    jean.takeDamage(2);
     jean.beRepaired(5);
     return 0;
 }

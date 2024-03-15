@@ -14,7 +14,7 @@ class Fixed
         Fixed( int const value );
         Fixed( float const value );
         Fixed( Fixed const & src );
-        Fixed & operator=( Fixed const & rhs );
+        Fixed &operator=( Fixed const & rhs );
         ~Fixed( void );
 
         int getRawBits( void ) const;
@@ -22,23 +22,14 @@ class Fixed
         float toFloat( void ) const;
         int toInt( void ) const;
 
-        friend std::ostream & operator<<( std::ostream & o, Fixed const & rhs );
-
-        friend bool operator>( Fixed const & lhs, Fixed const & rhs );
-        friend bool operator<( Fixed const & lhs, Fixed const & rhs);
-        friend bool operator>=( Fixed const & lhs, Fixed const & rhs);
-        friend bool operator<=( Fixed const & lhs, Fixed const & rhs);
-        friend bool operator==( Fixed const & lhs, Fixed const & rhs);
-        friend bool operator!=( Fixed const & lhs, Fixed const & rhs);
-
         Fixed operator+( Fixed const & rhs );
         Fixed operator-( Fixed const & rhs );
         Fixed operator*( Fixed const & rhs );
         Fixed operator/( Fixed const & rhs );
 
-        Fixed & operator++( void );
+        Fixed &operator++( void );
         Fixed operator++( int );
-        Fixed & operator--( void );
+        Fixed &operator--( void );
         Fixed operator--( int );
 
         static Fixed & min( Fixed & lhs, Fixed & rhs );
@@ -47,5 +38,14 @@ class Fixed
         static Fixed & max( Fixed & lhs, Fixed & rhs );
         static Fixed const & max( Fixed const & lhs, Fixed const & rhs );
 };
+
+std::ostream &operator<<( std::ostream & o, Fixed const & rhs );
+
+bool operator>( Fixed const & lhs, Fixed const & rhs );
+bool operator<( Fixed const & lhs, Fixed const & rhs);
+bool operator>=( Fixed const & lhs, Fixed const & rhs);
+bool operator<=( Fixed const & lhs, Fixed const & rhs);
+bool operator==( Fixed const & lhs, Fixed const & rhs);
+bool operator!=( Fixed const & lhs, Fixed const & rhs);
 
 #endif

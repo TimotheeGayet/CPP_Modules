@@ -2,14 +2,20 @@
 #include "ScavTrap.hpp"
 #include <iostream>
 
-int main( void ) {
-    ClapTrap clap("Clap", 10, 10, 10);
-    ScavTrap scav("Scav", 10, 10, 10);
+int main()
+{
+    ClapTrap clapTrap("ClapTrap");
+    ScavTrap scavTrap("ScavTrap");
 
-    clap.attack("Scav");
-    scav.takeDamage(10);
-    scav.beRepaired(5);
-    scav.guardGate();
+    clapTrap.attack("ScavTrap");
+    scavTrap.takeDamage(0);
+    scavTrap.beRepaired(5);
+
+    scavTrap.attack("ClapTrap");
+    clapTrap.takeDamage(30);
+    clapTrap.beRepaired(5);
+
+    scavTrap.guardGate();
 
     return 0;
 }
