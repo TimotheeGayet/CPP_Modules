@@ -8,8 +8,8 @@ ScavTrap::ScavTrap() : ClapTrap()
 ScavTrap::ScavTrap(const std::string& name) : ClapTrap(name)
 {
     this->_hitPoints = 100;
-    this->_energyPoints = 100;
-    this->_attackDamage = 30;
+    this->_energyPoints = 50;
+    this->_attackDamage = 20;
     this->_maxHp = 100;
     std::cout << "ScavTrap " << _name << " is born with parameters !" << std::endl;
 }
