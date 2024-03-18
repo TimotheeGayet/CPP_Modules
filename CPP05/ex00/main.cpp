@@ -2,23 +2,47 @@
 
 int main()
 {
-    Bureaucrat *bureaucrat = new Bureaucrat("John", 150);
+    Bureaucrat *bureaucrat = new Bureaucrat("John", 1);
 
-    bureaucrat->getName();
-    bureaucrat->getGrade();
+    try
+    {
+        Bureaucrat *bobby = new Bureaucrat("Bobby", -54);
+        bobby->getGrade();
+        delete bobby;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << "Error : " << e.what() << '\n';
+    }
+
+    try
+    {
+        Bureaucrat *bobby = new Bureaucrat("Bobby", 48687);
+        bobby->getGrade();
+        delete bobby;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << "Error : " << e.what() << '\n';
+    }
+
+    std::cout << *bureaucrat << std::endl;
 
     while (1) {
         try {
             bureaucrat->decrementGrade();
-            bureaucrat->getGrade();
-        } catch (Bureaucrat::GradeTooHighException &e) {
-            std::cerr << "Error : Grade is too low, below 150" << std::endl;
-            break;
-        } catch (Bureaucrat::GradeTooLowException &e) {
-            std::cerr << e.what() << std::endl;
-            break;
+            std::cout << *bureaucrat << std::endl;
         } catch (std::exception &e) {
-            std::cerr << e.what() << std::endl;
+            std::cerr << "Error: " << e.what() << std::endl;
+            break;
+        }
+    }
+    while (1) {
+        try {
+            bureaucrat->incrementGrade();
+            std::cout << *bureaucrat << std::endl;
+        } catch (std::exception &e) {
+            std::cerr << "Error: " << e.what() << std::endl;
             break;
         }
     }
