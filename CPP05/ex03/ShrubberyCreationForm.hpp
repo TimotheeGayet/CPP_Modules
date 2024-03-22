@@ -16,7 +16,7 @@ class ShrubberyCreationForm : public AForm {
 
         class CantOpenException : public std::exception {
             public:
-                 const char *what() const throw();
+                virtual const char *what() const throw();
         };
 
     private:

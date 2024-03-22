@@ -52,7 +52,7 @@ int	PhoneBook::init_contact() {
 		for (int j=1; j<8; j++) {
 			contact_list[j - 1] = contact_list[j];
 		}
-		std::cerr << "\nContact list is full, oldest contact has been removed" << std::endl;
+		std::cout << "\nContact list is full, oldest contact has been removed" << std::endl;
 		contact_list[7].emptyContact();
 		if (contact_list[7].initContact() == 1){
 			return 1;

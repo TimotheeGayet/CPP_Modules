@@ -12,7 +12,7 @@ int main()
     }
     catch(const std::exception& e)
     {
-        std::cerr << "Error : " << e.what() << '\n';
+        std::cout << "Error : " << e.what() << '\n';
     }
 
     try
@@ -23,7 +23,7 @@ int main()
     }
     catch(const std::exception& e)
     {
-        std::cerr << "Error : " << e.what() << '\n';
+        std::cout << "Error : " << e.what() << '\n';
     }
 
     std::cout << *bureaucrat << std::endl;
@@ -33,7 +33,7 @@ int main()
             bureaucrat->decrementGrade();
             std::cout << *bureaucrat << std::endl;
         } catch (std::exception &e) {
-            std::cerr << "Error: " << e.what() << std::endl;
+            std::cout << "Error: " << e.what() << std::endl;
             break;
         }
     }
@@ -42,7 +42,7 @@ int main()
             bureaucrat->incrementGrade();
             std::cout << *bureaucrat << std::endl;
         } catch (std::exception &e) {
-            std::cerr << "Error: " << e.what() << std::endl;
+            std::cout << "Error: " << e.what() << std::endl;
             break;
         }
     }
