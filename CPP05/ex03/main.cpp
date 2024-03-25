@@ -6,11 +6,8 @@
 #include <iostream>
 
 int main() {
-    std::string *s = new std::string();
-    s = NULL;
-
     Intern intern;
-    Bureaucrat bureaucrat(*s, 1);
+    Bureaucrat bureaucrat("bureaucrat", 1);
     AForm *form = NULL;
 
     try {
