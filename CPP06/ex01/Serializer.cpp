@@ -7,7 +7,7 @@ Serializer::Serializer(Serializer const &other){
     *this = other;
 };
 Serializer &Serializer::operator=(Serializer const &other){
-    *this = other;
+    (void) other;
     return *this;
 };
 Serializer::~Serializer(){};
