@@ -49,6 +49,9 @@
         "cinttypes": "cpp",
         "list": "cpp",
         "map": "cpp",
-        "set": "cpp"
+        "set": "cpp",
+        "cstring": "cpp",
+        "chrono": "cpp",
+        "ratio": "cpp"
     }
 }

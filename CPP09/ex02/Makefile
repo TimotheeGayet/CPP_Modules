@@ -1,15 +1,15 @@
 CXX = c++
 CXXFLAGS = -std=c++98 -Wall -Wextra -Werror
 
-TARGET = btc
+TARGET = Pmergeme
 
-SRCS = main.cpp BitcoinExchange.cpp
+SRCS = main.cpp Pmergeme.cpp
 OBJS = $(SRCS:%.cpp=.obj/%.o)
 
 $(TARGET) : $(OBJS)
 	$(CXX) $(OBJS) -o $@
  
-.obj/%.o : %.cpp Makefile BitcoinExchange.hpp
+.obj/%.o : %.cpp Makefile Pmergeme.hpp
 	@if [ ! -d .obj ]; then 	mkdir -p $(@D); fi
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
