@@ -12,13 +12,13 @@ int main() {
         std::vector<int>::iterator it = easyfind(v, 5);
         std::cout << "Value found: " << *it << std::endl;
     } catch (std::exception &e) {
-        std::cout << e.what() << std::endl;
+        std::cout << "Error: " << e.what() << std::endl;
     }
     try {
         std::vector<int>::iterator it = easyfind(v, 42);
         std::cout << "Value found: " << *it << std::endl;
     } catch (std::exception &e) {
-        std::cout << e.what() << std::endl;
+        std::cout << "Error: " << e.what() << std::endl;
     }
     return 0;
 }

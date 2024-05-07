@@ -30,7 +30,12 @@ class Span
         // Template Methods
 
         template <typename T>
-        void addSet(typename T::iterator a, typename T::iterator b){
+        void addSet(typename T::iterator a, typename T::iterator b)
+        {
+            if (this->_table.size() + std::distance(a, b) > this->_size)
+                throw SpanFullError();
+            else if (std::distance(a, b) == 0)
+                throw SpanEmpty();
             std::sort(a, b);
             std::merge(this->_table.begin(), this->_table.end(), a, b, this->_table);
         }
