@@ -8,10 +8,11 @@ int main(int argc, char **argv)
 		return 1;
 	}
 
-	std::map<Date, double> data;
+	std::map<std::string, double> data;
 	try
 	{
-		data = parseData(argv[1]);
+		data = parseData("data.csv");
+		btcPriceFind(data, argv[1]);
 	}
 	catch (std::exception &e)
 	{

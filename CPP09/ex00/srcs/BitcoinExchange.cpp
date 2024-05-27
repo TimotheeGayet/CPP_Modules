@@ -1,25 +1,8 @@
 #include "BitcoinExchange.hpp"
-#include <iostream>
-#include <fstream>
 
-void parseLine(std::string &line)
+void btcPriceFind(std::map<std::string, double> &data, std::string input_filename)
 {
-	if (line.find('|') == std::string::npos)
-	{
-		std::cout << "Error: bad input => " << line << std::endl;
-	}
-
-	int amount = std::stoi(line.substr(line.find('|') + 1));
-
-	if (amount < 0 || amount > 1000)
-	{
-		std::cout << "Error: bad input => " << line << std::endl;
-	}
-}
-
-void btcPriceFind(std::map<Date, double> &data, std::string input_filename)
-{
-	fstream file(input_filename);
+	std::ifstream file(input_filename.c_str());
 	std::string line;
 
 	if (!file.is_open())
@@ -34,38 +17,45 @@ void btcPriceFind(std::map<Date, double> &data, std::string input_filename)
 		std::getline(file, line);
 	}
 
-	while (line != "" && !file.eof())
+	while (true)
 	{
 		std::string input_date;
-		double amount;
-		int day, month, year;
+		double value = 0;
+		double amount = 0;
 
-		if (line.find('|') == std::string::npos)
+		try
 		{
-			std::cout << "Error: bad input => " << line << std::endl;
+			parseLine(line);
+
+			input_date = line.substr(0, line.find('|'));
+			amount = strtod(line.substr(line.find('|') + 1).c_str(), NULL);
+
+			input_date = input_date.substr(input_date.find_first_not_of(' '), input_date.find_last_not_of(' ') + 1);
+
+			parseInputDate(input_date);
+
+			if (input_date > data.rbegin()->first)
+			{
+				value = data.rbegin()->second;
+			}
+			else
+			{
+				for (std::map<std::string, double>::iterator it = data.begin(); it != data.end() && it->first <= input_date; it++)
+				{
+					value = it->second;
+				}
+			}
+
+			std::cout << input_date << " => " << amount << " = " << value * amount << std::endl;
 		}
-
-		input_date = line.substr(0, line.find('|'));
-		amount = stod(line.substr(line.find('|') + 1));
-		day = std::stoi(input_date.substr(0, input_date.find('-')));
-		month = std::stoi(input_date.substr(input_date.find('-') + 1, input_date.rfind('-') - input_date.find('-') - 1));
-		year = std::stoi(input_date.substr(input_date.rfind('-') + 1));
-
-		Date d(year, month, day);
-		while (data.find(d) == data.end() && d.getYear() >= 2009)
+		catch (std::exception &e)
 		{
-			d--;
+			std::cout << e.what() << std::endl;
 		}
-
-		if (d.getYear() < 2009)
+		if (file.eof())
 		{
-			std::cout << input_date << " => " << amount << " = 0" << std::endl;
+			break;
 		}
-		else
-		{
-			std::cout << input_date << " => " << amount << " = " << data[d] * amount << std::endl;
-		}
-
 		std::getline(file, line);
 	}
 }

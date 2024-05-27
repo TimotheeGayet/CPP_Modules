@@ -69,6 +69,12 @@
         "locale": "cpp",
         "mutex": "cpp",
         "stack": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "compare": "cpp",
+        "concepts": "cpp",
+        "numbers": "cpp",
+        "ranges": "cpp",
+        "span": "cpp",
+        "cfenv": "cpp"
     }
 }

@@ -5,8 +5,11 @@
 #include <sstream>
 #include <fstream>
 #include <iostream>
-#include "./Date/Date.hpp"
+#include <stdlib.h>
 
-std::map<Date, double> parseData(std::string const &data_filename);
+void parseLine(std::string &line);
+void parseInputDate(std::string &input_date);
+std::map<std::string, double> parseData(std::string const &data_filename);
+void btcPriceFind(std::map<std::string, double> &data, std::string input_filename);
 
 #endif
