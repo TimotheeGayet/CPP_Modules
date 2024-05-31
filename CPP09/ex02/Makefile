@@ -8,10 +8,10 @@ OBJS = $(SRCS:%.cpp=.obj/%.o)
 
 $(TARGET) : $(OBJS)
 	$(CXX) $(OBJS) -o $@
- 
+
 .obj/%.o : %.cpp Makefile Pmergeme.hpp
 	@if [ ! -d .obj ]; then 	mkdir -p $(@D); fi
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -c $< -IPmerge.hpp -o $@
 
 .PHONY : clean
 clean :

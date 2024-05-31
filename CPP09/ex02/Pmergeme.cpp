@@ -5,104 +5,99 @@
 #include <deque>
 #include <iomanip>
 
-Pmergeme::Pmergeme() {
+Pmergeme::Pmergeme()
+{
 }
 
-Pmergeme::Pmergeme(const Pmergeme& other) {
+Pmergeme::Pmergeme(const Pmergeme &other)
+{
     (void)other;
 }
 
-
-Pmergeme& Pmergeme::operator=(const Pmergeme& other) {
+Pmergeme &Pmergeme::operator=(const Pmergeme &other)
+{
     (void)other;
     return *this;
 }
 
-Pmergeme::~Pmergeme() {
+Pmergeme::~Pmergeme()
+{
 }
 
 template <typename Container>
-void insertionSort(Container& arr, int left, int right) {
-    for (int i = left + 1; i <= right; i++) {
-        int key = arr[i];
-        int j = i - 1;
-        while (j >= left && arr[j] > key) {
-            arr[j + 1] = arr[j];
-            j--;
+Container &FJMerge(Container &arr, int groups_size = 2)
+{
+    if (static_cast<size_t>(groups_size) > arr.size())
+        return arr;
+
+    for (typename Container::iterator it = arr.begin(); it <= arr.end() - groups_size; it += groups_size)
+    {
+        if (*(it + (groups_size / 2) - 1) > *(it + groups_size - 1))
+        {
+            std::swap_ranges(it, it + groups_size / 2, it + groups_size / 2);
         }
-        arr[j + 1] = key;
     }
+
+    return FJMerge(arr, groups_size * 2);
 }
 
 template <typename Container>
-void merge(Container& arr, int left, int mid, int right) {
-    int n1 = mid - left + 1;
-    int n2 = right - mid;
-    Container L(n1), R(n2);
-    for (int i = 0; i < n1; i++)
-        L[i] = arr[left + i];
-    for (int j = 0; j < n2; j++)
-        R[j] = arr[mid + 1 + j];
-    int i = 0, j = 0, k = left;
-    while (i < n1 && j < n2) {
-        if (L[i] <= R[j]) {
-            arr[k] = L[i];
-            i++;
-        } else {
-            arr[k] = R[j];
-            j++;
-        }
-        k++;
+Container &FJInsert(Container &arr, int groups_size)
+{
+    int uneven = arr.size() % 2;
+    int temp;
+
+    if (uneven)
+    {
+        temp = arr[arr.size() - 1];
+        arr.pop_back();
     }
-    while (i < n1) {
-        arr[k] = L[i];
-        i++;
-        k++;
-    }
-    while (j < n2) {
-        arr[k] = R[j];
-        j++;
-        k++;
-    }
+
+    (void)temp;
+
+    std::rotate(arr.begin(), arr.begin() + groups_size / 2, arr.begin() + groups_size - 1);
+    std::rotate(arr.end() - 2 - groups_size / 2, arr.end() - 2, arr.end() - 2);
+
+    return arr;
 }
 
 template <typename Container>
-void fordJohnsonSort(Container& arr, int left, int right) {
-    if (left < right) {
-        if (right - left + 1 < 10) {
-            insertionSort(arr, left, right);
-        } else {
-            int mid = left + (right - left) / 2;
-            fordJohnsonSort(arr, left, mid);
-            fordJohnsonSort(arr, mid + 1, right);
-            merge(arr, left, mid, right);
-        }
-    }
+Container &fordJohnsonSort(Container &arr)
+{
+    FJMerge(arr);
+    FJInsert(arr, (arr.size() - (arr.size() % 2)));
+    return arr;
 }
 
 Pmergeme::Pmergeme(int argc, char **argv)
 {
-    std::vector<int> arr;
+    std::vector<int> arr1;
     std::deque<int> arr2;
     for (int i = 1; i < argc; i++)
     {
-        arr.push_back(atoi(argv[i]));
+        arr1.push_back(atoi(argv[i]));
         arr2.push_back(atoi(argv[i]));
     }
 
     clock_t start = clock();
-    fordJohnsonSort(arr, 0, arr.size() - 1);
+    fordJohnsonSort(arr1);
     clock_t end = clock();
-    double elapsed = static_cast<double>(end - start) / CLOCKS_PER_SEC;
-    std::cout << "list sort: " << std::endl;
-    for (std::size_t i = 0; i < arr.size(); i++)
-        std::cout << arr[i] << " ";
+
+    std::cout << "After sort: " << std::endl;
+    for (std::vector<int>::iterator it = arr1.begin(); it != arr1.end(); it++)
+    {
+        std::cout << *it << " ";
+    }
     std::cout << std::endl;
+    std::cout << std::endl;
+
+    double elapsed = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000;
     std::cout << "Vector sort: " << std::fixed << std::setprecision(5) << elapsed << "s" << std::endl;
 
     start = clock();
-    fordJohnsonSort(arr2, 0, arr2.size() - 1);
+    fordJohnsonSort(arr2);
     end = clock();
-    elapsed = static_cast<double>(end - start) / CLOCKS_PER_SEC;
+
+    elapsed = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000;
     std::cout << "Deque sort: " << std::fixed << std::setprecision(5) << elapsed << "s" << std::endl;
 }
