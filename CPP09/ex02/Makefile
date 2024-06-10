@@ -1,17 +1,17 @@
 CXX = c++
 CXXFLAGS = -std=c++98 -Wall -Wextra -Werror
 
-TARGET = Pmergeme
+TARGET = PmergeMe
 
-SRCS = main.cpp Pmergeme.cpp
+SRCS = main.cpp PmergeMe.cpp
 OBJS = $(SRCS:%.cpp=.obj/%.o)
 
 $(TARGET) : $(OBJS)
 	$(CXX) $(OBJS) -o $@
 
-.obj/%.o : %.cpp Makefile Pmergeme.hpp
-	@if [ ! -d .obj ]; then 	mkdir -p $(@D); fi
-	$(CXX) $(CXXFLAGS) -c $< -IPmerge.hpp -o $@
+.obj/%.o : %.cpp Makefile PmergeMe.hpp
+	@if [ ! -d .obj ]; then mkdir -p $(@D); fi
+	$(CXX) $(CXXFLAGS) -c $< -IPmergeMe.hpp -o $@
 
 .PHONY : clean
 clean :
