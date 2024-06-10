@@ -36,7 +36,7 @@ public:
         return (container);
     };
 
-    template <typename T, typename U>
+    template <typename T>
     static void sortContainer(T &container)
     {
         U list_of_pairs;
@@ -51,7 +51,7 @@ public:
             container.pop_back();
         }
 
-        list_of_pairs = _pairingContainer<T, U>(container);
+        list_of_pairs = _pairingContainer<T>(container);
         _sortPair(list_of_pairs);
         _mergeSortPair(list_of_pairs);
         _insertFirst(container, list_of_pairs, uneven_nbr);
@@ -70,11 +70,11 @@ private:
     PmergeMe &operator=(const PmergeMe &src);
     ~PmergeMe();
 
-    template <typename T, typename U>
-    static U _pairingContainer(T &container)
+    template <typename T>
+    static T _pairingContainer(T &container)
     {
         T pair;
-        U pairsList;
+        T pairsList;
 
         for (typename T::iterator it = container.begin(); it != container.end(); it++)
         {
@@ -157,8 +157,8 @@ private:
         }
     }
 
-    template <typename T, typename U>
-    static void _insertFirst(U &container, T &list_of_pairs, int uneven_nbr)
+    template <typename T>
+    static void _insertFirst(T &container, T &list_of_pairs, int uneven_nbr)
     {
         container.push_back(list_of_pairs.front().back());
 
@@ -175,8 +175,8 @@ private:
         }
     };
 
-    template <typename T, typename U>
-    static void _insertSecond(U &container, T &list_of_pairs)
+    template <typename T>
+    static void _insertSecond(T &container, T &list_of_pairs)
     {
         size_t sizeGroup = 0;
         size_t index = 0;
