@@ -1,56 +1,64 @@
 #include "PmergeMe.hpp"
-#include <algorithm>
-#include <deque>
 #include <vector>
+#include <deque>
 #include <iostream>
 #include <ctime>
+#include <exception>
+#include <cstdlib>
 
-int main(int argc, char **argv)
+int main(int argc, const char **argv)
 {
     if (argc < 2)
     {
-        std::cout << "Usage: ./PmergeMe [list of numbers]" << std::endl;
+        std::cerr << "Usage: " << argv[0] << " <numbers...>" << std::endl;
         return 1;
     }
 
-    std::vector<int> vec;
-    std::deque<int> deq;
-
-    // Check
     try
     {
-        vec = PmergeMe::convertToContainer<std::vector<int>>(static_cast<const char **>(argv++));
-        deq = PmergeMe::convertToContainer<std::deque<int>>(static_cast<const char **>(argv++));
+        // Convert input arguments to std::vector<int>
+        std::vector<int> vec = PmergeMe::argvToContainer< std::vector<int> >(argv + 1);
+
+        // Convert input arguments to std::deque<int>
+        // std::deque<int> deq = PmergeMe::argvToContainer< std::deque<int> >(argv + 1);
+
+        // Measure time to sort the vector
+        clock_t start_vec = clock();
+        PmergeMe::sortContainer< std::vector<int>, std::vector< std::pair<int, int> > >(vec);
+        clock_t end_vec = clock();
+        double duration_vec = static_cast<double>(end_vec - start_vec) / CLOCKS_PER_SEC * 1e6;
+
+        // Measure time to sort the deque
+        // clock_t start_deq = clock();
+        // PmergeMe::sortContainer< std::deque<int>, std::deque< std::pair<int, int> > >(deq);
+        // clock_t end_deq = clock();
+        // double duration_deq = static_cast<double>(end_deq - start_deq) / CLOCKS_PER_SEC * 1e6;
+
+        // Output sorted vector
+        std::cout << "Sorted vector: ";
+        for (std::vector<int>::iterator it = vec.begin(); it != vec.end(); ++it)
+        {
+            std::cout << *it << " ";
+        }
+        std::cout << std::endl;
+
+        // Output sorted deque
+        // std::cout << "Sorted deque: ";
+        // for (std::deque<int>::iterator it = deq.begin(); it != deq.end(); ++it)
+        // {
+        //     std::cout << *it << " ";
+        // }
+        // std::cout << std::endl;
+
+        // Output the timing results
+        std::cout << "Time to sort vector: " << duration_vec << " microseconds" << std::endl;
+        // std::cout << "Time to sort deque: " << duration_deq << " microseconds" << std::endl;
     }
-    catch (std::exception &e)
+    catch (const PmergeMe::BadInputException &e)
     {
-        std::cout << e.what() << std::endl;
+        std::cerr << "Error: " << e.what() << std::endl;
         return 1;
     }
-
-    std::cout << "Before : ";
-    for (std::vector<int>::iterator it = vec.begin(); it != vec.end(); it++)
-        std::cout << *it << " ";
-    std::cout << std::endl;
-
-    std::clock_t start;
-    double duration;
-    start = std::clock();
-    PmergeMe::sortContainer<std::vector<int>>(vec);
-    duration = (std::clock() - start) / (double)CLOCKS_PER_SEC;
-
-    std::cout << "After : ";
-    for (std::vector<int>::iterator it = vec.begin(); it != vec.end(); it++)
-        std::cout << *it << " ";
-    std::cout << std::endl;
-
-    std::cout << "Time to process a range of " << vec.size() << " elements with std::vector: " << duration << "s" << std::endl;
-
-    start = std::clock();
-    PmergeMe::sortContainer<std::deque<int>>(deq);
-    duration = (std::clock() - start) / (double)CLOCKS_PER_SEC;
-
-    std::cout << "Time to process a range of " << deq.size() << " elements with std::deque: " << duration << "s" << std::endl;
 
     return 0;
 }

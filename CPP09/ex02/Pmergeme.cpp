@@ -13,3 +13,8 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &src)
 	return (*this);
 }
 PmergeMe::~PmergeMe(void) {}
+
+const char *PmergeMe::BadInputException::what(void) const throw()
+{
+	return ("Error: Bad input exception");
+}
